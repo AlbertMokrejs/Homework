@@ -29,6 +29,6 @@ public class recursion implements interface hw1{
 	    return g;}
 	return sqr(n, (n / g + g)/2);}
 
-    
+}
 
     
