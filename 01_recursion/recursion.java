@@ -1,4 +1,4 @@
-public class recursion implements interface hw1{
+public class recursion implements hw1{
     public String name(){
 	return "Mokrejs,Albert";}
 
