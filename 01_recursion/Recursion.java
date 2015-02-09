@@ -20,7 +20,7 @@ public class Recursion implements hw1{
 	return fibi(b, a+b, c-1);}
 
     public double sqrt(double n){
-	if(c < 0){
+	if(n < 0){
 	    return 0;}
 	return sqr(n, (n / (n/2) + (n/2)) / 2);}
 
