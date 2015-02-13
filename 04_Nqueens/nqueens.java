@@ -8,7 +8,7 @@ public class nqueens{
 	this(5);}
 
     public nqueens(int a){
-	char[][] board = new char[a][a];
+	board = new char[a][a];
 	for(int x = 0; x<board.length; x++){
 	    for(int y =0; y<board.length; y++){
 		board[x][y] = ' ';}}}
@@ -16,7 +16,7 @@ public class nqueens{
   public String toString(){
 	String str = "";
 	for(int x = 0; x < board.length; x++){
-	    for(int y = 0; y<board.length;y++){
+	    for(int y = 0; y < board.length;y++){
 		str+= board[x][y];}
 	    str+= "\n";}
 	return str;}
@@ -32,7 +32,7 @@ public class nqueens{
 	return solver(a,b,0);}
 
     public boolean line(int a, int b, int c, int d){
-	if(a < 0 || b < 0 || b > board.length || a > board.length || board[a][b] == '@'){
+	if(a < 0 || b < 0 || b >= board.length || a >= board.length || board[a][b] == '@'){
 	    return false;}
 	else{
 	    boolean tmp = line(a+c,b+d,c,d);
@@ -58,6 +58,8 @@ public class nqueens{
 	return false;}
 
     public static void main(String[] args){
-	nqueens a = new nqueens();
+	nqueens a = new nqueens(4);
 	a.solve();
 	System.out.println(a);}}
+	    
+	    
