@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class NQueens{
 
     final static String clear =  "\033[2J";
@@ -18,7 +21,7 @@ public class NQueens{
     }
 
     public String name(){
-	return "albert.mokrejs";
+	return "mokrejs.albert";
     }
 
     public String toString(){
