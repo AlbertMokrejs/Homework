@@ -17,7 +17,7 @@ public class KnightsTour{
     }
     
     public String name(){
-      return "Mokrejs,Albert";}
+      return "mokrejs.albert";}
  
     public void wait(int millis){
 	try {
@@ -43,13 +43,15 @@ public class KnightsTour{
 		board[x][y] = -1;}}
     }
 
-    public void solve(int a, int b){
-	if(!solve(a,b,0)){}
+    public boolean solve(int a, int b){
+	if(!solve(a,b,0)){return false;}
+	return true;
     }
 
     
-    public void solve(){
-	if(!solve(0,0,0)){}
+    public boolean solve(){
+	if(!solve(0,0,0)){return false;}
+	return true;
     }
 
 		
@@ -70,9 +72,7 @@ public class KnightsTour{
     }
 
     public static void main(String[] args){
-	KnightsTour a = new KnightsTour(6);
-	a.solve();
-	System.out.println(a);
+
 
 
     }}
