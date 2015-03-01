@@ -1,6 +1,6 @@
 public class mergesort{
 
-  public static int[] merge(int[] a, int[] b){
+ public static int[] merge(int[] a, int[] b){
     int c = 0;
     int d = 0;
     int[] e = new int[a.length+b.length];
@@ -17,12 +17,19 @@ public class mergesort{
           c++;}}
       if(b.length-(d+1) > 0){
         while(d < b.length){
-          e[c+d] = a[d];
-          d++;}}}
+          e[c+d] = b[d];
+          d++;}}
+    return e;}
           
-      public static void mergesort(int[] a){
+      public static int[] mergesort(int[] a){
         if(a.length == 1){}
-        else{if(a.length == 2 && a[0] < a[1]){}
+        else{if(a.length == 2){
+          if(a[0] < a[1]){
+            return a;}
+          else{
+          int TMP = a[0];
+          a[0] = a[1];
+            a[1] = TMP;}}
         else{int[] b = new int[a.length/2];
           int[] c = new int[a.length - b.length];
           for(int x = 0; x < a.length; x++){
@@ -30,5 +37,17 @@ public class mergesort{
               b[x] = a[x];}
             else{
               c[x - b.length] = a[x];}}
-              a = merge(b.mergesort(), c.mergesort());}}}}
-        
+             b = mergesort(b);
+             c = mergesort(c);
+              a = merge(b,c);}}
+        return a;}
+  
+  	public static 
+  
+  public static void main(String[]args){
+    int[] x = new int[30];
+    for(int y = 0; y < x.length; y++){
+      x[y] = 100 + y*10 - y%2*1000;}
+    x = mergesort(x);
+    for(int z = 0; z < x.length; z++){
+      System.out.println(x[z]);}}}
