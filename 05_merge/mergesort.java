@@ -21,7 +21,7 @@ public class mergesort{
           d++;}}
     return e;}
           
-      public static int[] mergesort(int[] a){
+      public static void mergesort(int[] a){
         if(a.length == 1){}
         else{if(a.length == 2){
           if(a[0] < a[1]){
@@ -37,10 +37,10 @@ public class mergesort{
               b[x] = a[x];}
             else{
               c[x - b.length] = a[x];}}
-             b = mergesort(b);
-             c = mergesort(c);
+             mergesort(b);
+             mergesort(c);
               a = merge(b,c);}}
-        return a;}
+        }
   
   	public static 
   
@@ -48,6 +48,6 @@ public class mergesort{
     int[] x = new int[30];
     for(int y = 0; y < x.length; y++){
       x[y] = 100 + y*10 - y%2*1000;}
-    x = mergesort(x);
+    mergesort(x);
     for(int z = 0; z < x.length; z++){
       System.out.println(x[z]);}}}
