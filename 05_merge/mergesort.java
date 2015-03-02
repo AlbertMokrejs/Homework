@@ -24,8 +24,7 @@ public class mergesort{
       public static void mergesort(int[] a){
         if(a.length == 1){}
         else{if(a.length == 2){
-          if(a[0] < a[1]){
-            return a;}
+          if(a[0] < a[1]){}
           else{
           int TMP = a[0];
           a[0] = a[1];
