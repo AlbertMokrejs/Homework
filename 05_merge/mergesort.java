@@ -1,5 +1,14 @@
+//*******************************************************************
+// Java compiler created in PHP to quickly and safely test code.
+// NOTE: please read the 'More Info' tab to the right for shortcuts.
+//*******************************************************************
+ 
+import java.lang.Math; // header stuff MUST go above the first class
+import java.util.Arrays;
+ 
+// our main class becomes a file but the main method is still found
 public class mergesort{
-
+ 
  public static int[] merge(int[] a, int[] b){
     int c = 0;
     int d = 0;
@@ -22,7 +31,8 @@ public class mergesort{
     return e;}
           
       public static void mergesort(int[] s){
-a = Arrays.copyOf(s,s.length);
+ int[] a= new int[s.length];
+        a = Arrays.copyOf(s,s.length);
         if(a.length == 1){}
         else{if(a.length == 2){
           if(a[0] < a[1]){}
@@ -47,7 +57,7 @@ s[x] =  a[x];}
   public static void main(String[]args){
     int[] x = new int[30];
     for(int y = 0; y < x.length; y++){
-      x[y] = 100 + y*10 - y%2*1000;}
+      x[y] = 100 + y*10 - (y%2)*1000;}
     mergesort(x);
     for(int z = 0; z < x.length; z++){
       System.out.println(x[z]);}}}
