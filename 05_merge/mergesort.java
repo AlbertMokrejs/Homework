@@ -21,7 +21,8 @@ public class mergesort{
           d++;}}
     return e;}
           
-      public static void mergesort(int[] a){
+      public static void mergesort(int[] s){
+a = Arrays.copyOf(s,s.length);
         if(a.length == 1){}
         else{if(a.length == 2){
           if(a[0] < a[1]){}
@@ -39,9 +40,9 @@ public class mergesort{
              mergesort(b);
              mergesort(c);
               a = merge(b,c);}}
-        }
-  
-  	public static 
+for(int x = 0; x<s.length; x++){
+s[x] =  a[x];}
+}
   
   public static void main(String[]args){
     int[] x = new int[30];
