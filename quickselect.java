@@ -6,68 +6,35 @@
 import java.lang.Math; // header stuff MUST go above the first class
 import java.util.Random;
 
-public class qselect{
+public class quickselect{
 
-public static int partitionS(int[] p, int start, int end){
-int[] a = new int[p.length];
-Random r = new Random();
-int L = 0;
-int R = end-1;
-int z = (int)r.nextDouble()*end;
-for(int x = 0; x < end; x++){
-if(x!=z){
-if(p[x] < p[z]){
-a[L++] = p[x];}
-else{
-a[R--] = p[x];}}}
-a[L] = p[z];
-for(int q = end; q< p.length; q++){
-  a[q] = p[q];}    
-for(int y = 0; y < p.length; y++){
-p[y] = a[y];}
-return L;}
-  
-public static int partitionB(int[] p, int start, int end){
-int[] a = new int[p.length];
-Random r = new Random();
-int R = 0;
-int L = end-1;
-int z = (int)r.nextDouble()*end;
-for(int x = 0; x < end; x++){
-if(x!=z){
-if(p[x] < p[z]){
-a[L--] = p[x];}
-else{
-a[R++] = p[x];}}}
-a[L] = p[z];
-for(int q = end; q< p.length; q++){
-  a[q] = p[q];}    
-for(int y = 0; y < p.length; y++){
-p[y] = a[y];}
-return L;}
-  
-  public static int findkS(int[] p, int k){
-    int x = p.length;
-    while(x > k-1){
-      x = partitionS(p,0,x);}
-    return p[k-1];}
-  
-    public static int findkB(int[] p, int k){
-    int x = p.length;
-    while(x > k-1){
-      x = partitionB(p,0,x);}
-    return p[k-1];}
-  
-  
-
-public static void main(String[]args){
-int[] x = new int[10];
+public static int quickselect(int[] P, int a, int b, int k) {
+  int last = b;
+  int start = a;
+    int x = partition(P, first, last);
+    if (x == k-1) {
+      return P[k-1];}
+    if (x > k){
+      return quickselect(P, first, x-1, k);
+    }else{
+    return quickselect(P, x+ 1, last, k);}}
+ 
+public static int partition(int[] P, int a, int b) {
+  int first = a;
+  int last = b;
   Random r = new Random();
-for(int y = 0; y < 10; y++){
-    x[y] = r.nextInt(15)-8;}
-  for(int a: x){
-    System.out.println(a);}
-  int d = findkB(x,3);
-  System.out.println("/n" + d);
-  for(int a: x){
-    System.out.println(a);}}}
+  int x = first + r.nextInt(last - first + 1);
+  swap(P, last, x);
+  for (int y = first; y < last; y++) {
+    if (P[y] > P[last]) {
+      swap(P, y, first);
+      first++;}}
+  swap(P, first, last);
+  return first;}
+ 
+public static void swap(int[] P, int x, int y) {
+  int TMP = G[x];
+  P[x] = P[y];
+  P[y] = TMP;}
+
+}
