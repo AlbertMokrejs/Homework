@@ -10,7 +10,7 @@ public class quickselect{
 
 public static int quickselect(int[] P, int a, int b, int k) {
   int last = b;
-  int start = a;
+  int first = a;
     int x = partition(P, first, last);
     if (x == k-1) {
       return P[k-1];}
@@ -33,7 +33,7 @@ public static int partition(int[] P, int a, int b) {
   return first;}
  
 public static void swap(int[] P, int x, int y) {
-  int TMP = G[x];
+  int TMP = P[x];
   P[x] = P[y];
   P[y] = TMP;}
 
