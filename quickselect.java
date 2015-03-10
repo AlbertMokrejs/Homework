@@ -9,15 +9,17 @@ import java.util.Random;
 public class quickselect{
   
   public static void quicksort(int[] P){
-    int x = quickselect(P,P.length/2);
-    qhelper(P,0,x);
-  	qhelper(P,x,P.length);}
+    qhelper(P,0,P.length-1);}
+ 
   
-  public static void qhelper(int[] P, int x,int y){
-    int z = quickselect(P,x,y,(y-x)/2);
-    if(Math.abs(y-x) >= 3){
-      qhelper(P,x,z);
-      qhelper(P,z,y);}}
+  public static void qhelper(int[] P, int x, int y) {
+    int z = partition(P, y, x);
+        if (x < z - 1) {
+            qhelper(P,x,z-1);
+        }
+        if (y > z) {
+            qhelper(P,z,y);
+        }}
     
   
   public static int quickselect(int[] P, int k){
@@ -39,10 +41,10 @@ public static int partition(int[] P, int a, int b) {
   int first = a;
   int last = b;
   Random r = new Random();
-  int x = first + (int)r.nextDouble()*(last - first + 1);
+  int x = first + (int)r.nextDouble()*(last - first - 1);
   swap(P, last, x);
   for (int y = first; y < last; y++) {
-    if (P[y] > P[last]) {
+    if (P[y] < P[last]) {
       swap(P, y, first);
       first++;}}
   swap(P, first, last);
