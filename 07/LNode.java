@@ -22,9 +22,13 @@ public void delink(){
   pointer = null;}
 
 public int findEnd(){
-  if(hasNext()){
-    return 1+next().findEnd();}
-  return 0;}
+  LNode tmp = this;
+  int x = 0;
+  while(tmp.hasNext()){
+    tmp = tmp.next();
+    x++}
+  return x;
+  }
   
 public LNode findFromEnd(int n){
   int x = findEnd();
