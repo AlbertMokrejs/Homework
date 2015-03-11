@@ -9,7 +9,13 @@ public class LinkedList{
     public LNode get(int a){
 	if(a < 0 or a > start.findEnd()){
 	    throw new IndexOutOfBoundsException;}
-	return start.findFromEnd(start.findEnd()-a);}
+	LNode tmp = start;
+    	while(tmp.hasNext() && a > 0){
+    		tmp = tmp.next();
+    		a--;
+    	}
+    	return tmp;
+    }
 
     public void set(int a, int b){
 	get(a).set(a);}
@@ -36,6 +42,7 @@ public class LinkedList{
 	end = x;}
 
     public void remove(int a){
+    	get(a-1).link(get(a+1));}
     
 	
 	
