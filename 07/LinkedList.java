@@ -143,8 +143,7 @@ public class LinkedList{
 	while(tmp.hasNext()){
 	    a += "" + tmp +",";
 	    tmp = tmp.next();}
-	a+= "" + tmp + "";
-	a+= "]";
+	a+= "" + tmp + "" + "]";
 	return a;}
 	
 
