@@ -6,7 +6,7 @@
 import java.lang.Math; // header stuff MUST go above the first class
 import java.util.Random;
 
-public class Sorts{
+public class sorts{
   
   public String name(){
       return "Mokrejs, Albert";
