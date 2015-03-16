@@ -1,29 +1,33 @@
-public class MyLinkedList{
-    LNode start;
-    LNode end;
+public class MyLinkedList<T>{
+    LNode<T> start;
+    LNode<T> end;
     int Q;
+    
+    public String name(){
+	return "Mokrejš, Albert";
+    }
 
-    public MyLinkedList(int a){
-	LNode x = new LNode(a);
+    public MyLinkedList(T a){
+	LNode<T> x = new LNode<T>(a);
 	start = x;
 	end = x;
 	Q = 1;}
 
-    public MyLinkedList(LNode a){
+    public MyLinkedList(LNode<T> a){
 	start = a;
 	end = a;
 	Q = 1;}
 
     public MyLinkedList(){
-	LNode a = new LNode();
+	LNode<T> a = new LNode<T>();
 	start = a;
 	end = a;
 	Q = 1;}
 
-    public LNode get(int a){
+    public LNode<T> get(int a){
 	if(a < 0 || a > size()){
 	    throw new IndexOutOfBoundsException();}
-	LNode tmp = start;
+	LNode<T> tmp = start;
     	while(tmp.hasNext() && a > 0){
 	    tmp = tmp.next();
 	    a--;
@@ -34,68 +38,68 @@ public class MyLinkedList{
     public int size(){
 	return Q;}
 
-    public void set(int a, int b){
-	get(a).set(a);}
+    public void set(int a, T b){
+	get(a).set(b);}
 
-    public boolean add(int a, int b){
+    public boolean add(int a, T b){
         if(a < 0 || a >= size()){
 	    throw new IndexOutOfBoundsException();}
 	if(a == 0){
-	    LNode x = new LNode(b);
+	    LNode<T> x = new LNode<T>(b);
 	    x.link(start);
 	    start = x;}
 	if(a == size()){
-	    LNode x = new LNode(b);
+	    LNode<T> x = new LNode<T>(b);
 	    end.link(x);
 	    end = x;}
 	else{
-	    LNode x = new LNode(b);
+	    LNode<T> x = new LNode<T>(b);
 	    x.link(get(a));
 	    get(a-1).link(x);}
 	Q++;
 	return true;}
 
-    public boolean add(int a){
-	LNode x = new LNode(a);
+    public boolean add(T a){
+	LNode<T> x = new LNode<T>(a);
 	end.link(x);
 	end = x;
 	Q++;
 	return true;}
 
-    public int remove(){
-	LNode y = start;
-	LNode x = get(1);
+    public T remove(){
+	LNode<T> y = start;
+	LNode<T> x = get(1);
 	start.delink();
 	start = x;
 	Q--;
 	return y.get();}
 
-    public int remove(int a){
+    public T remove(int a){
 	if(a >= size()){
 	    throw new IndexOutOfBoundsException();}
 	Q--;
 	if(a == 0){
 	    return remove();}
 	else{
-	    LNode x = get(a);
+	    LNode<T> x = get(a);
 	    get(a-1).link(get(a+1));
 	    x.delink();
 	    return x.get();}}
 
-    public int removeLast(){
+    public T removeLast(){
 	Q--;
-	LNode tmp = start;
+	LNode<T> tmp = start;
     	while(tmp.hasNext() && tmp.next()!=end){
 	    tmp = tmp.next();
     	}
-	LNode str = end;
+	LNode<T> str = end;
 	end = tmp;
 	tmp.delink();
 	return str.get();
     }
     
-    public boolean contains(int a){
-	LNode tmp = start;
+    public boolean contains(T a){
+	LNode<T> tmp = start;
 	while(tmp.hasNext()){
 	    if(tmp.get() == a){
 		return true;}
@@ -103,7 +107,7 @@ public class MyLinkedList{
 	return false;}
 
     public boolean contains(LNode a){
-	LNode tmp = start;
+	LNode<T> tmp = start;
 	while(tmp.hasNext()){
 	    if(tmp == a){
 		return true;}
@@ -112,10 +116,10 @@ public class MyLinkedList{
 
 
 
-    public int indexOf(int a){
-	LNode tmp = start;
+    public int indexOf(T a){
+	LNode<T> tmp = start;
 	int x = 0;
-	int str = start.get();
+	T str = start.get();
 	while(tmp.hasNext() && tmp.get()!= a){
 	    str = tmp.get();
 	    tmp = tmp.next();
@@ -125,8 +129,8 @@ public class MyLinkedList{
 	return x;
 	}
 
-    public int lastIndexOf(int a){
-	LNode tmp = start;
+    public int lastIndexOf(T a){
+	LNode<T> tmp = start;
 	int x = 0;
 	int y = -1;
 	while(tmp.hasNext()){
@@ -139,7 +143,7 @@ public class MyLinkedList{
 
     public String toString(){
 	String a = "[";
-	LNode tmp = start;
+	LNode<T> tmp = start;
 	while(tmp.hasNext()){
 	    a += "" + tmp +",";
 	    tmp = tmp.next();}
@@ -147,14 +151,6 @@ public class MyLinkedList{
 	return a;}
 	
 
-    public static void main(String[] args){
-	LinkedList x = new LinkedList(5);
-	x.add(4);
-	x.add(3);
-	x.add(2);
-	x.add(1);
-	x.remove(x.indexOf(3));
-	System.out.println(x);}
 	
 	    
 }
