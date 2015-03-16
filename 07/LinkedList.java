@@ -1,20 +1,20 @@
-public class LinkedList{
+public class MyLinkedList{
     LNode start;
     LNode end;
     int Q;
 
-    public LinkedList(int a){
+    public MyLinkedList(int a){
 	LNode x = new LNode(a);
 	start = x;
 	end = x;
 	Q = 1;}
 
-    public LinkedList(LNode a){
+    public MyLinkedList(LNode a){
 	start = a;
 	end = a;
 	Q = 1;}
 
-    public LinkedList(){
+    public MyLinkedList(){
 	LNode a = new LNode();
 	start = a;
 	end = a;
