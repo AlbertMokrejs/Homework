@@ -1,17 +1,17 @@
-public class LNode{
-    int value;
-    LNode pointer;
+public class LNode<T>{
+    T value;
+    LNode<T> pointer;
 
-    public void set(int a){
+    public void set(T a){
 	value = a;}
 
-    public void link(LNode a){
+    public void link(LNode<T> a){
 	pointer = a;}
   
-    public int get(){
+    public T get(){
 	return value;}
   
-    public LNode next(){
+    public LNode<T> next(){
 	if(hasNext()){
 	    return pointer;}
 	return null;}
@@ -27,9 +27,9 @@ public class LNode{
 	    return 1+next().findEnd();}
 	return 0;}
   
-    public LNode findFromEnd(int n){
+    public LNode<T> findFromEnd(int n){
 	int x = findEnd();
-	LNode tmp = this;
+	LNode<T> tmp = this;
 	while(x > n && tmp.hasNext()){
 	    tmp = tmp.next();
 	    x--;
@@ -41,7 +41,7 @@ public class LNode{
     public String toString(){
 	return ""+value;}
 
-    LNode(int a, LNode b){
+    LNode(T a, LNode<T> b){
 	value = a;
 	pointer = b;}
   
@@ -49,7 +49,7 @@ public class LNode{
 	value = 0;
 	pointer = null;}
   
-    LNode(int a){
+    LNode(T a){
 	value = a;
 	pointer = null;}
 
