@@ -111,7 +111,7 @@ private class MyLLIterator<T> implements Iterator<T>{
 	return y.get();}
 
     public T remove(int a){
-	if(a >= size()){
+	if(a < 0 || a >= size()){
 	    throw new IndexOutOfBoundsException();}
 	Q--;
 	if(a == 0){
