@@ -116,6 +116,9 @@ private class MyLLIterator<T> implements Iterator<T>{
 	Q--;
 	if(a == 0){
 	    return remove();}
+	if(a == size() -1){
+		return removeLast();}
+	}
 	else{
 	    LNode<T> x = get(a);
 	    get(a-1).link(get(a+1));
