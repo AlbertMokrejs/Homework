@@ -4,6 +4,10 @@ public class MyLinkedList<T> implements Iterable<T>{
     LNode<T> start;
     LNode<T> end;
     int Q;
+    
+ public boolean isEmpty(){
+ 	return (Q == 1) && (start.get() == null);
+ }
 
 private class MyLLIterator<T> implements Iterator<T>{
 
