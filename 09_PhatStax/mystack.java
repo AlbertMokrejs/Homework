@@ -10,11 +10,12 @@ public T peek(){
     throw new EmptyStackException();}
   return S.get(0);}
   
-public void push(T x){
+public T push(T x){
   if(S.isEmpty()){
     S.set(0, x);}
   else{
-  S.add(0, x);}}
+  S.add(0, x);}
+  return x;}
   
 public boolean empty(){
   return S.isEmpty();}
