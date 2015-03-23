@@ -2,10 +2,10 @@ import java.util.*;
 
 public class myqueue<T>{
 
-myLinkedList<T> S;
+MyLinkedList<T> S;
 
 public myqueue(){
-  S = new myLinkedList<T>();}
+  S = new MyLinkedList<T>();}
   
 public boolean enqueue(T a){
   if(a == null){
@@ -14,7 +14,7 @@ public boolean enqueue(T a){
   return true;}
   
 public T dequeue(){
-  if(S.size > 1){
+    if(S.size() > 1){
   return S.remove(1);}
   throw new NoSuchElementException();}
   
