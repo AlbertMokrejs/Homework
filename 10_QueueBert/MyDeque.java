@@ -44,7 +44,7 @@ public class MyDeque<T>{
 	if(h == t-1 && S[t] == null){
 	    S[t] = x;}
 	else{
-	    if(t!=length-1){
+	    if(t!=S.length-1){
 		S[t+1] = x;}
 	    else{
 		t = -1;
