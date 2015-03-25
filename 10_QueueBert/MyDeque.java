@@ -1,17 +1,25 @@
+//*******************************************************************
+// Java compiler created in PHP to quickly and safely test code.
+// NOTE: please read the 'More Info' tab to the right for shortcuts.
+//*******************************************************************
+
+import java.lang.Math; // header stuff MUST go above the first class
+import java.util.*;
+
 public class MyDeque<T>{
     public int h;
     public int t;
-    public T[] S;
+    public Object[] S;
 
-    public MyDeque()<T>(){
-	S = new T[10];
+    public MyDeque(){
+	S = new Object[10];
 	h = 0;
 	t = 0;}
 
     public void addFirst(T x){
 	if(h-1 == t){
 	    resize();}
-	if(h == 0 && t == S.length -1;){
+	if(h == 0 && t == S.length -1){
 	    resize();}
 	if(h == t && S[h] == null){
 	    S[h] = x;}
@@ -21,7 +29,7 @@ public class MyDeque<T>{
 	    if(h!=0){
 		S[h-1] = x;}
 	    else{
-		h = length;
+		h = S.length;
 		S[h-1] = x;}}
 	h--;
     }
@@ -29,14 +37,14 @@ public class MyDeque<T>{
     public void addLast(T x){
 	if(h-1 == t){
 	    resize();}
-	if(h == 0 && t == S.length -1;){
+	if(h == 0 && t == S.length -1){
 	    resize();}
 	if(h == t && S[t] == null){
 	    S[h] = x;}
 	if(h == t-1 && S[t] == null){
 	    S[t] = x;}
 	else{
-	    if(t!=length-1;){
+	    if(t!=length-1){
 		S[t+1] = x;}
 	    else{
 		t = -1;
@@ -47,7 +55,7 @@ public class MyDeque<T>{
     public T removeFirst(){
 	if(S[h] == null){
 	    throw new NoSuchElementException();}
-        T tmp = S[h];
+        T tmp = (T)S[h];
 	S[h] = null;
 	h++;
 	if(h > S.length-1){
@@ -57,7 +65,7 @@ public class MyDeque<T>{
     public T removeLast(){
 	if(S[t] == null){
 	    throw new NoSuchElementException();}
-    T tmp = S[t];
+    T tmp = (T)S[t];
     S[t] = null;
     t--;
     if(t < 0){
@@ -67,15 +75,15 @@ public class MyDeque<T>{
     public T getFirst(){
 	if(S[h] == null){
 	    throw new NoSuchElementException();}
-	return S[h];}
+	return (T)S[h];}
 
     public T getLast(){
-	is(S[t] == null){
+	if(S[t] == null){
 	    throw new NoSuchElementException();}
-	return S[t];}
+	return (T)S[t];}
 
     public void resize(){
-	T[] z = new T[S.length *2];
+	Object[] z = new Object[S.length *2];
 	int c = 0;
 	int x = h;
 	if(t < h){
