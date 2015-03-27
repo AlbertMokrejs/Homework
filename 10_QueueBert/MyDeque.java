@@ -55,6 +55,9 @@
 		h++;
 		if(h > S.length-1){
 		    h = 0;}
+		if(size() <= (int)S.length/4){
+			desize();
+		}
 		return tmp;}
 	
 	    public T removeLast(){
@@ -65,6 +68,9 @@
 	    t--;
 	    if(t < 0){
 		h = s.length-1;}
+		if(size() <= (int)S.length){
+			desize();
+		}
 	    return tmp;}
 	
 	    public T getFirst(){
@@ -97,4 +103,43 @@
 			x++;
 			c++;}}
 		S = T;}
+		
+		public void desize(){
+		Object[] z = new Object[(int)S.length/2];
+		int c = 0;
+		int x = h;
+		if(t < h){
+		    while(x < S.length){
+			T[c] = S[x];
+			x++;
+			c++;}
+		    x = 0;
+		    while(x < t+1){
+			T[x] = S[x];
+			x++;
+			c++;}}
+		if(h < t){
+		    while(x <= t){
+			T[c] = S[x];
+			x++;
+			c++;}}
+		S = T;}
+		
+		public int size(){
+			int c = 0;
+		int x = h;
+		if(t < h){
+		    while(x < S.length){
+			x++;
+			c++;}
+		    x = 0;
+		    while(x < t+1){
+			x++;
+			c++;}}
+		if(h < t){
+		    while(x <= t){
+			x++;
+			c++;}}
+			return c;}
+		
 }
