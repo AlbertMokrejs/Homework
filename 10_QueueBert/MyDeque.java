@@ -18,7 +18,7 @@
 		    resize();}
 		if(h == t && S[h] == null){
 		    S[h] = x;}
-		if(h == t-1 && S[h] == null){
+		if(h == t-1 && S[h] == null){ //second add is a special case
 		    S[h] = x;}
 		else{
 		    if(h!=0){
@@ -36,7 +36,7 @@
 		    resize();}
 		if(h == t && S[t] == null){
 		    S[h] = x;}
-		if(h == t-1 && S[t] == null){
+		if(h == t-1 && S[t] == null){ //special case
 		    S[t] = x;}
 		else{
 		    if(t!=S.length-1){
