@@ -5,11 +5,25 @@
 	    public int h;
 	    public int t;
 	    public Object[] S;
+	    public boolean TOGGLE;
 	
 	    public MyDeque(){
-		S = new Object[10];
+		S = new Object[16];
 		h = 0;
-		t = 0;}
+		t = 0;
+	    	TOGGLE = true;
+	    }
+	    
+	    public MyDeque(boolean x){
+	    	S = new Object[16];
+	    	h = 0;
+	    	t = 0;
+	    	TOGGLE = x;
+	    }
+	    
+	    public void flop(){
+	    	TOGGLE = !TOGGLE;
+	    }
 	
 	    public void addFirst(T x){
 		if(h-1 == t){
@@ -55,7 +69,7 @@
 		h++;
 		if(h > S.length-1){
 		    h = 0;}
-		if(size() <= (int)S.length/4){
+		if(S.length < 1000 && TOGGLE && size() <= (int)S.length/4){
 			desize();
 		}
 		return tmp;}
@@ -68,7 +82,7 @@
 	    t--;
 	    if(t < 0){
 		h = s.length-1;}
-		if(size() <= (int)S.length){
+		if(S.length < 10000 && TOGGLE && size() <= (int)S.length/4){
 			desize();
 		}
 	    return tmp;}
