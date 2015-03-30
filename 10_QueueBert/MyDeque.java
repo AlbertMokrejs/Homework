@@ -6,6 +6,10 @@
 	    public int t;
 	    public Object[] S;
 	    public boolean TOGGLE;
+	    
+	    public String name(){
+	    	return "Mokrejs,Albert";
+	    }
 
 	    public static void main(String[]args){
 		MyDeque a = new MyDeque(true);
@@ -44,15 +48,15 @@
 		int x = h;
 		if(h > t){
 		    while(x < S.length){
-			str += S[x];
+			str += S[x] + " , ";
 			x++;}
 		    x = 0;
 		    while(x <= t){
-			str += S[x];
+			str += S[x] + " , ";
 			x++;}}
 		else{
 		    while(x <= t){
-			str += S[x];
+			str += S[x] + " , ";
 			x++;}}
 		return str;}
 
