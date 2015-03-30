@@ -1,6 +1,6 @@
 public class mazesolver{
 
-deque<Stack<coord>> deck;
+ArrayDeque<Stack<coord>> deck;
 char[][] map;
 boolean solved;
 
@@ -21,7 +21,7 @@ public mazesolver(char[][] x){
   Stack<coord> tmp = new Stack<coord>();
   map = x;
   tmp.push(find('S'));
-  deck = new deque<Stack<coord>>();
+  deck = new ArrayDeque<Stack<coord>>();
   deck.addLast(tmp);
 }
 
@@ -59,4 +59,37 @@ public void next(){
     deck.addLast(tmps);
   }
 }
+  
+public boolean solution(coord a){
+  return map[a.getx()][a.gety()] == 'E';
+}
+
+public void run(){
+  Stack<coord> tmp;
+  while(!solved){
+    tmp = deck.removeFirst();
+    deck.addFirst(tmp);
+    solved = solution(tmp.peek());
+      if(!solved){
+        next();
+      }
+  }
+  coord tmpb;
+  while(!tmp.empty()){
+    tmpb = tmp.pop();
+    map[tmpb.getx()][tmpb.gety()] = 'O';
+  }
+  System.out.println(this);
+}
+
+  public String toString(){
+    String str = "";
+    for(int x = 0; x < map.length; x++){
+      for(int y = 0; y < map[0].length; y++){
+        str += map[x][y] + " ";
+      }
+      str += "\n";
+    }
+    return str;}
     
+}
