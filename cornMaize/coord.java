@@ -19,4 +19,10 @@ public setx(int a){
 public sety(int a){
   y = a;}
   
+
+public setxy(int a, int b){
+  sety(b);
+  setx(a);
+}
+
 }
