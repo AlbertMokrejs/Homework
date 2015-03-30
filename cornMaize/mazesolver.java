@@ -1,6 +1,6 @@
 public class mazesolver{
 
-deque<stack<coord>> deck;
+deque<Stack<coord>> deck;
 char[][] map;
 boolean solved;
 
@@ -18,10 +18,10 @@ public coord find(char a){
 }
 
 public mazesolver(char[][] x){
-  stack<coord> tmp = new stack<coord>();
+  Stack<coord> tmp = new Stack<coord>();
   map = x;
   tmp.push(find('S'));
-  deck = new deque<stack<coord>>();
+  deck = new deque<Stack<coord>>();
   deck.addLast(tmp);
 }
 
@@ -30,9 +30,32 @@ public boolean check(coord a, coord b){
 }
 
 public void next(){
-  stack<coord> a = deck.removeFirst();
+  Stack<coord> a = deck.removeFirst();
   coord tmpb = a.pop();
   coord tmpa = a.peek();
   tmpa.setx(tmpa.getx()+1);
   if(check(tmpa,tmpb)){
+    Stack<coord> tmps = (Stack<coord>)a.clone();
+    tmps.push(tmpa);
+    deck.addLast(tmps);
+  }
+  tmpa.setx(tmpa.getx()-1);
+  if(check(tmpa,tmpb)){
+    Stack<coord> tmps = (Stack<coord>)a.clone();
+    tmps.push(tmpa);
+    deck.addLast(tmps);
+  }
+  tmpa.sety(tmpa.gety()+1);
+  if(check(tmpa,tmpb)){
+    Stack<coord> tmps = (Stack<coord>)a.clone();
+    tmps.push(tmpa);
+    deck.addLast(tmps);
+  }
+  tmpa.sety(tmpa.gety()-1);
+  if(check(tmpa,tmpb)){
+    Stack<coord> tmps = (Stack<coord>)a.clone();
+    tmps.push(tmpa);
+    deck.addLast(tmps);
+  }
+}
     
