@@ -39,19 +39,20 @@ public void next(){
     tmps.push(tmpa);
     deck.addLast(tmps);
   }
-  tmpa.setx(tmpa.getx()-1);
+  tmpa.setx(tmpa.getx()-2);
   if(check(tmpa,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
     tmps.push(tmpa);
     deck.addLast(tmps);
   }
+  tmpa.setx(tmpa.getx()+1);
   tmpa.sety(tmpa.gety()+1);
   if(check(tmpa,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
     tmps.push(tmpa);
     deck.addLast(tmps);
   }
-  tmpa.sety(tmpa.gety()-1);
+  tmpa.sety(tmpa.gety()-2);
   if(check(tmpa,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
     tmps.push(tmpa);
