@@ -47,32 +47,35 @@ public boolean check(coord a, coord b){
 
 public void next(){
   Stack<coord> a = deck.removeFirst();
+  coord tmbz = a.peek();
+  coord tmby = a.peek();
+  coord tmpx = a.peek();
+  coord typw = a.peek();
   coord tmpa = a.pop();
   coord tmpb = a.peek();
   a.push(tmpa);
-  tmpa.setx(tmpa.getx()+1);
-  if(check(tmpa,tmpb)){
+  tmpz.setx(tmpz.getx()+1);
+  if(check(tmpz,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpa);
+    tmps.push(tmpz);
     deck.addLast(tmps);
   }
-  tmpa.setx(tmpa.getx()-2);
-  if(check(tmpa,tmpb)){
+  tmpy.setx(tmpy.getx()-1);
+  if(check(tmpy,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpa);
+    tmps.push(tmpy);
     deck.addLast(tmps);
   }
-  tmpa.setx(tmpa.getx()+1);
-  tmpa.sety(tmpa.gety()+1);
-  if(check(tmpa,tmpb)){
+  tmpx.sety(tmpx.gety()+1);
+  if(check(tmpx,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpa);
+    tmps.push(tmpx);
     deck.addLast(tmps);
   }
-  tmpa.sety(tmpa.gety()-2);
-  if(check(tmpa,tmpb)){
+  tmpw.sety(tmpw.gety()-1);
+  if(check(tmpw,tmpb)){
     Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpa);
+    tmps.push(tmpw);
     deck.addLast(tmps);
   }
 }
