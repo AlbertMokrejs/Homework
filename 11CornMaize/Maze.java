@@ -56,27 +56,27 @@ public void next(){
   a.push(tmpa);
   tmpz.setx(tmpz.getx()+1);
   if(check(tmpz,tmpb)){
-    Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpz);
-    deck.addLast(tmps);
+    Stack<coord> tmpsa = (Stack<coord>)a.clone();
+    tmpsa.push(tmpz);
+    deck.addLast(tmpsa);
   }
   tmpy.setx(tmpy.getx()-1);
   if(check(tmpy,tmpb)){
-    Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpy);
-    deck.addLast(tmps);
+    Stack<coord> tmpsb = (Stack<coord>)a.clone();
+    tmpsb.push(tmpy);
+    deck.addLast(tmpsb);
   }
   tmpx.sety(tmpx.gety()+1);
   if(check(tmpx,tmpb)){
-    Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpx);
-    deck.addLast(tmps);
+    Stack<coord> tmpsc = (Stack<coord>)a.clone();
+    tmpsc.push(tmpx);
+    deck.addLast(tmpsc);
   }
   tmpw.sety(tmpw.gety()-1);
   if(check(tmpw,tmpb)){
-    Stack<coord> tmps = (Stack<coord>)a.clone();
-    tmps.push(tmpw);
-    deck.addLast(tmps);
+    Stack<coord> tmpsd = (Stack<coord>)a.clone();
+    tmpsd.push(tmpw);
+    deck.addLast(tmpsd);
   }
 }
   
