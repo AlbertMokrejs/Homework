@@ -5,6 +5,13 @@ public class Maze{
     ArrayDeque<Stack<coord>> deck;
     char[][] map;
     boolean solved;
+    private static final String clear =  "\033[2J";
+    private static final String hide =  "\033[?25l";
+    private static final String show =  "\033[?25h";
+    boolean printmode;
+    
+    public String go(int x,int y){
+	return ("\033[" + x + ";" + y + "H");}
 
     public static void main(String[]args){
 	char[][] a = new char[5][5];
@@ -33,6 +40,7 @@ public class Maze{
     }
 
     public Maze(char[][] x){
+	printmode = true;
 	Stack<coord> tmp = new Stack<coord>();
 	map = x;
 	tmp.push(find('S'));
@@ -58,24 +66,28 @@ public class Maze{
 	a.push(tmpa);
 	tmpz.setx(tmpz.getx()+1);
 	if(check(tmpz,tmpb)){
+	    printify(tmpz);
 	    Stack<coord> tmpsa = (Stack<coord>)a.clone();
 	    tmpsa.push(tmpz);
 	    deck.addLast(tmpsa);
 	}
 	tmpy.setx(tmpy.getx()-1);
 	if(check(tmpy,tmpb)){
+	    printify(tmpy);
 	    Stack<coord> tmpsb = (Stack<coord>)a.clone();
 	    tmpsb.push(tmpy);
 	    deck.addLast(tmpsb);
 	}
 	tmpx.sety(tmpx.gety()+1);
 	if(check(tmpx,tmpb)){
+	    printify(tmpx);
 	    Stack<coord> tmpsc = (Stack<coord>)a.clone();
 	    tmpsc.push(tmpx);
 	    deck.addLast(tmpsc);
 	}
 	tmpw.sety(tmpw.gety()-1);
 	if(check(tmpw,tmpb)){
+	    printify(tmpw);
 	    Stack<coord> tmpsd = (Stack<coord>)a.clone();
 	    tmpsd.push(tmpw);
 	    deck.addLast(tmpsd);
@@ -83,6 +95,7 @@ public class Maze{
     }
   
     public boolean solution(coord a){
+	
 	return map[a.getx()][a.gety()] == 'E';
     }
 
@@ -113,5 +126,19 @@ public class Maze{
 	    str += "\n";
 	}
 	return str;}
+
+    public void printify(coord tmpz){
+	if(printmode){
+	    char printtm = map[tmpz.getx()][tmpz.gety()];
+	    try {
+		Thread.sleep(250);
+	    } catch(InterruptedException ex) {
+		Thread.currentThread().interrupt();
+	    }
+	    map[tmpz.getx()][tmpz.gety()] = '?';
+	    System.out.println(clear + go(0,0) + show + this);
+	    map[tmpz.getx()][tmpz.gety()] = printtm;
+	}
+    }
     
-}
+    }
