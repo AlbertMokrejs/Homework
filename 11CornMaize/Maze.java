@@ -11,6 +11,9 @@ public class Maze{
     boolean printmode;
     int[] solution;
     
+    public int[] solutionCoordinates(){
+    	return solution;}
+    
     public String go(int x,int y){
 	return ("\033[" + x + ";" + y + "H");}
 
@@ -45,6 +48,7 @@ public class Maze{
 
     public Maze(char[][] x){
 	printmode = false;
+	solution = new int[1];
 	Stack<coord> tmp = new Stack<coord>();
 	map = x;
 	tmp.push(find('S'));
@@ -168,6 +172,19 @@ public class Maze{
 	    }
 	}
 	coord tmpb;
+	Stack<coord> copy = (Stack<coord>)tmp.clone();
+	int z = 0;
+	Stack<coord> newer = new Stack<coord>();
+	while(!copy.empty()){
+		newer.push(copy.pop());
+		z++;
+	}
+	solution = new int[2z];
+	while(z >= 0){
+		solution[z] = newer.peek().getx();
+		solution[z-1] = newer.pop().gety();
+		z-= 2;
+	}
 	while(!tmp.empty()){
 	    tmpb = tmp.pop();
 	    map[tmpb.getx()][tmpb.gety()] = 'x';
@@ -186,6 +203,19 @@ public class Maze{
 	    }
 	}
 	coord tmpb;
+	Stack<coord> copy = (Stack<coord>)tmp.clone();
+	int z = 0;
+	Stack<coord> newer = new Stack<coord>();
+	while(!copy.empty()){
+		newer.push(copy.pop());
+		z++;
+	}
+	solution = new int[2z];
+	while(z >= 0){
+		solution[z] = newer.peek().getx();
+		solution[z-1] = newer.pop().gety();
+		z-= 2;
+	}
 	while(!tmp.empty()){
 	    tmpb = tmp.pop();
 	    map[tmpb.getx()][tmpb.gety()] = 'x';
