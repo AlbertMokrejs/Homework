@@ -29,8 +29,11 @@ public class Maze{
 	a[7] = new char[]{'#','#',' ',' ',' ',' ',' ','E','#'};
 	a[8] = new char[]{'#','#','#','#','#','#','#','#','#'};
 	Maze x = new Maze(a);
-	x.run();
+	Maze y = new Maze(a);
+	x.solveBFS(true);
+	y.solveDFS(true);
 	System.out.println(x);
+	System.out.println(y);
     }
 
     public coord find(char a){
