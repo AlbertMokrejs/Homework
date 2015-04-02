@@ -28,12 +28,34 @@ public class Maze{
 	a[6] = new char[]{'#',' ',' ','#','#','#','#','#','#'};
 	a[7] = new char[]{'#','#',' ',' ',' ',' ',' ','E','#'};
 	a[8] = new char[]{'#','#','#','#','#','#','#','#','#'};
+	char[][] b = new char[9][9];
+	b[0] = new char[]{'#','#','#','#','#','#','#','#','#'};
+	b[1] = new char[]{'#',' ',' ',' ',' ',' ',' ','S','#'};
+	b[2] = new char[]{'#','#','#',' ','#',' ','#','#','#'};
+	b[3] = new char[]{'#','#','#',' ','#',' ',' ',' ','#'};
+	b[4] = new char[]{'#',' ',' ',' ',' ','#','#',' ','#'};
+	b[5] = new char[]{'#',' ','#','#',' ',' ',' ',' ','#'};
+	b[6] = new char[]{'#',' ',' ','#','#','#','#','#','#'};
+	b[7] = new char[]{'#','#',' ',' ',' ',' ',' ','E','#'};
+	b[8] = new char[]{'#','#','#','#','#','#','#','#','#'};
 	Maze x = new Maze(a);
-	Maze y = new Maze(a);
+	Maze y = new Maze((char[][])b.clone());
 	x.solveBFS(true);
-	y.solveDFS(true);
 	System.out.println(x);
+	y.solveDFS(true);
 	System.out.println(y);
+	int[] d = x.solutionCoordinates();
+	int[] c = y.solutionCoordinates();
+	String str = "";
+	for(int e = 0; e < d.length; e++){
+	    str+= d[e] + ",";
+	}
+	System.out.println(str);
+	str = "";
+	for(int f = 0; f < c.length; f++){
+	    str+= c[f] + ",";
+	}
+	System.out.println(str);
     }
 
     public coord find(char a){
@@ -53,7 +75,7 @@ public class Maze{
 	printmode = false;
 	solution = new int[1];
 	Stack<coord> tmp = new Stack<coord>();
-	map = x;
+	map = (char[][])x.clone();
 	tmp.push(find('S'));
 	tmp.push(find('S'));
 	System.out.println(tmp);
@@ -182,11 +204,14 @@ public class Maze{
 		newer.push(copy.pop());
 		z++;
 	}
-	solution = new int[2z];
-	while(z >= 0){
-		solution[z] = newer.peek().getx();
-		solution[z-1] = newer.pop().gety();
-		z-= 2;
+	z-=1;
+	int x = 0;
+	solution = new int[z+1];
+	newer.pop();
+	while(x < z){
+		solution[x+1] = newer.peek().getx();
+		solution[x] = newer.pop().gety();
+		x+= 2;
 	}
 	while(!tmp.empty()){
 	    tmpb = tmp.pop();
@@ -213,11 +238,14 @@ public class Maze{
 		newer.push(copy.pop());
 		z++;
 	}
-	solution = new int[2z];
-	while(z >= 0){
-		solution[z] = newer.peek().getx();
-		solution[z-1] = newer.pop().gety();
-		z-= 2;
+	z-=1;
+	int x = 0;
+	solution = new int[z+1];
+	newer.pop();
+	while(x < z){
+		solution[x+1] = newer.peek().getx();
+		solution[x] = newer.pop().gety();
+		x+= 2;
 	}
 	while(!tmp.empty()){
 	    tmpb = tmp.pop();
@@ -238,7 +266,7 @@ public class Maze{
 	if(printmode){
 	    char printtm = map[tmpz.getx()][tmpz.gety()];
 	    try {
-		Thread.sleep(250);
+		Thread.sleep(40);
 	    }catch(InterruptedException ex) {
 		Thread.currentThread().interrupt();}
 	    map[tmpz.getx()][tmpz.gety()] = 'x';
