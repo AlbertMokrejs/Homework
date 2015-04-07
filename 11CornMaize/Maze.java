@@ -16,30 +16,40 @@ public class Maze{
     
     public String go(int x,int y){
 	return ("\033[" + x + ";" + y + "H");}
+	
+public Maze(String name){
+	String str = "";
+	int X;
+	int Y;
+	try{
+	    Scanner fi = new Scanner(new File(name));
+	    while(fi.hasNext()){
+		String tmp = in.nextLine();
+		str += tmp;
+		if(X = null){
+		    X = tmp.length();}
+		Y++;
+	    }}
+	catch(Exception e){
+	    System.out.println("All These Wicked Errors, Yo! :C ");
+	    System.exit(-1);
+	}
+	map = new char[X][Y];
+	for(int x = 0; x < str.length(); x++){
+	    char TMP = str.charAt(x);
+	    map[x % X][x / Y] = TMP;
+	}
+	printmode = false;
+	solution = new int[1];
+	Stack<coord> tmp = new Stack<coord>();
+	tmp.push(find('S'));
+	tmp.push(find('S'));
+	deck = new ArrayDeque<Stack<coord>>();
+	deck.addLast(tmp);
+}
 
     public static void main(String[]args){
-	char[][] a = new char[9][9];
-	a[0] = new char[]{'#','#','#','#','#','#','#','#','#'};
-	a[1] = new char[]{'#',' ',' ',' ',' ',' ',' ','S','#'};
-	a[2] = new char[]{'#','#','#',' ','#',' ','#','#','#'};
-	a[3] = new char[]{'#','#','#',' ','#',' ',' ',' ','#'};
-	a[4] = new char[]{'#',' ',' ',' ',' ','#','#',' ','#'};
-	a[5] = new char[]{'#',' ','#','#',' ',' ',' ',' ','#'};
-	a[6] = new char[]{'#',' ',' ','#','#','#','#','#','#'};
-	a[7] = new char[]{'#','#',' ',' ',' ',' ',' ','E','#'};
-	a[8] = new char[]{'#','#','#','#','#','#','#','#','#'};
-	char[][] b = new char[9][9];
-	b[0] = new char[]{'#','#','#','#','#','#','#','#','#'};
-	b[1] = new char[]{'#',' ',' ',' ',' ',' ',' ','S','#'};
-	b[2] = new char[]{'#','#','#',' ','#',' ','#','#','#'};
-	b[3] = new char[]{'#','#','#',' ','#',' ',' ',' ','#'};
-	b[4] = new char[]{'#',' ',' ',' ',' ','#','#',' ','#'};
-	b[5] = new char[]{'#',' ','#','#',' ',' ',' ',' ','#'};
-	b[6] = new char[]{'#',' ',' ','#','#','#','#','#','#'};
-	b[7] = new char[]{'#','#',' ',' ',' ',' ',' ','E','#'};
-	b[8] = new char[]{'#','#','#','#','#','#','#','#','#'};
-	Maze x = new Maze(a);
-	Maze y = new Maze((char[][])b.clone());
+	//
 	x.solveBFS(true);
 	System.out.println(x);
 	y.solveDFS(true);
@@ -71,17 +81,6 @@ public class Maze{
 	return tmp;
     }
 
-    public Maze(char[][] x){
-	printmode = false;
-	solution = new int[1];
-	Stack<coord> tmp = new Stack<coord>();
-	map = (char[][])x.clone();
-	tmp.push(find('S'));
-	tmp.push(find('S'));
-	System.out.println(tmp);
-	deck = new ArrayDeque<Stack<coord>>();
-	deck.addLast(tmp);
-    }
     
     public boolean solveBFS(boolean x){
     	printmode = x;
