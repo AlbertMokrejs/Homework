@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Maze{
 
@@ -19,14 +20,14 @@ public class Maze{
 	
 public Maze(String name){
 	String str = "";
-	int X;
-	int Y;
+	int X = -1;
+	int Y = 0;
 	try{
 	    Scanner fi = new Scanner(new File(name));
 	    while(fi.hasNext()){
-		String tmp = in.nextLine();
+		String tmp = fi.nextLine();
 		str += tmp;
-		if(X = null){
+		if(Y == 0){
 		    X = tmp.length();}
 		Y++;
 	    }}
@@ -34,10 +35,11 @@ public Maze(String name){
 	    System.out.println("All These Wicked Errors, Yo! :C ");
 	    System.exit(-1);
 	}
-	map = new char[X][Y];
+	map = new char[Y][X];
 	for(int x = 0; x < str.length(); x++){
 	    char TMP = str.charAt(x);
-	    map[x % X][x / Y] = TMP;
+	    System.out.println(""+ (x%X) + " " + (x/Y));
+	    map[x / X][x % X] = TMP;
 	}
 	printmode = false;
 	solution = new int[1];
@@ -49,7 +51,8 @@ public Maze(String name){
 }
 
     public static void main(String[]args){
-	//
+	Maze x = new Maze("map.txt");
+	Maze y = new Maze("map.txt");
 	x.solveBFS(true);
 	System.out.println(x);
 	y.solveDFS(true);
