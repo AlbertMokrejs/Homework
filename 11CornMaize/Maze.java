@@ -12,6 +12,19 @@ public class Maze{
     boolean printmode;
     int[] solution;
     
+    public String toString(boolean x){
+    	for(char[] a: map){
+    		for(char b: a){
+    			if(b == 'x'){
+    				b = ' ';
+    			}
+    		}
+    	}
+    	solved = false;
+    	solveBFS(true);
+    	return toString();
+    }
+    
     public int[] solutionCoordinates(){
     	return solution;}
     
