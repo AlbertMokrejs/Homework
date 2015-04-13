@@ -10,6 +10,34 @@
 	    public String name(){
 	    	return "Mokrejs,Albert";
 	    }
+	    
+	    public static T findFirst(){
+	    	MyDeque<T> tmp = new MyDeque<T>(TOGGLE);
+	    	T x = this.getFirst();
+	    	try{
+	    		while(true){
+	    			tmp.addFirst(this.removeFirst());
+	    			if(tmp.getFirst().compareTo(x) > 0){
+	    				x = tmp.getFirst();
+	    			}
+	    		}
+	    	}
+	    	catch(NoSuchElementException e){
+	    	}
+	    	try{
+	    		while(true){
+	    			if(!tmp.getFirst().equals(x)){
+	    				this.addFirst(tmp.removeFirst());}
+	    			else{
+	    				tmp.removeFirst();
+	    			}
+	    		}
+	    	}
+	    	catch(NoSuchElementException e){
+	    	}
+	    	return x;
+	    }
+	    
 
 	    public static void main(String[]args){
 		MyDeque a = new MyDeque(true);
