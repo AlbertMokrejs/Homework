@@ -24,6 +24,9 @@ public class myPQ<T>{
     }
 
     public void add(T x, int y){
+    	if(y > 9999*9999){
+    		y = 9999*9999 - 1;
+    	}
 	if(t < S.length-1){
 	    S[t] = x;
 	    P[t] = y;
@@ -35,7 +38,7 @@ public class myPQ<T>{
     }
 
     public void add(T x){
-	add(x, 100000000);
+	add(x, 9999*9999);
 
     public void resize(){
 	if(t < S.length/4){
@@ -59,3 +62,30 @@ public class myPQ<T>{
 	    S = tmp;
 	}
     }
+    
+    public int findFirst(){
+    	int x = 9999*9999 + 1;
+    	int z = 0;
+    	for(int y = 0; y < t; y++){
+    		if(P[y] < x){
+    			x = P[y];
+    			z = y;
+    		}
+    	}
+    	return z;
+    }
+    
+    public T getS(){
+    	int x = findFirst();
+    	T tmp = S[x];
+    	for(int y = x; y < t; y++){
+    		S[y] = S[y+1];
+    		P[y] = P[y+1];
+    	}
+    	S[t] = null;
+    	P[t] = 0;
+    	t--;
+    	return tmp;
+    }
+
+}
