@@ -34,6 +34,9 @@ public class myPQ<T>{
 	}
     }
 
+    public void add(T x){
+	add(x, 100000000);
+
     public void resize(){
 	if(t < S.length/4){
 	    Object[] tmp = new Object[(int)S.length/4 +1];
@@ -46,5 +49,13 @@ public class myPQ<T>{
 	    S = tmp;
 	}
 	else{
-	    
-		
+	    Object[] tmp = new Object[S.length*2];
+	    int[] tmpb = new Object[tmp.length];
+	    for(int x = 0; x < t; x++){
+		tmp[x] = S[x];
+		tmpb[x] = P[x];
+	    }
+	    P = tmpb;
+	    S = tmp;
+	}
+    }
