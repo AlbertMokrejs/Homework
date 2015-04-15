@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Maze{
+public class MazeI{
 
     ArrayDeque<Stack<coord>> deck;
     char[][] map;
@@ -31,7 +31,7 @@ public class Maze{
     public String go(int x,int y){
 	return ("\033[" + x + ";" + y + "H");}
 	
-public Maze(String name){
+public MazeI(String name){
 	String str = "";
 	int X = -1;
 	int Y = 0;
@@ -64,8 +64,8 @@ public Maze(String name){
 }
 
     public static void main(String[]args){
-	Maze x = new Maze("map.txt");
-	Maze y = new Maze("map.txt");
+	MazeI x = new MazeI("map.txt");
+	MazeI y = new MazeI("map.txt");
 	x.solveBFS(true);
 	System.out.println(x);
 	y.solveDFS(true);
