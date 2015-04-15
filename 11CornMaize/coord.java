@@ -15,6 +15,13 @@ public coord(coord a){
 	y = a.gety();
 	d = a.getd();
 }
+
+public int dist(coord a){
+	int b = 0;
+	b+= abs(a.getx() - x);
+	b+= abs(a.gety() - y);
+	return b;
+}
   
 public int getd(){
  return d;
