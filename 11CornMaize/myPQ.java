@@ -39,6 +39,7 @@ public class myPQ<T>{
 
     public void add(T x){
 	add(x, 9999*9999);
+    }
 
     public void resize(){
 	if(t < S.length/4){
@@ -53,7 +54,7 @@ public class myPQ<T>{
 	}
 	else{
 	    Object[] tmp = new Object[S.length*2];
-	    int[] tmpb = new Object[tmp.length];
+	    int[] tmpb = new int[tmp.length];
 	    for(int x = 0; x < t; x++){
 		tmp[x] = S[x];
 		tmpb[x] = P[x];
@@ -77,7 +78,7 @@ public class myPQ<T>{
     
     public T getS(){
     	int x = findFirst();
-    	T tmp = S[x];
+    	T tmp = (T)S[x];
     	for(int y = x; y < t; y++){
     		S[y] = S[y+1];
     		P[y] = P[y+1];
