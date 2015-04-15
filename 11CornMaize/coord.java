@@ -2,14 +2,31 @@ public class coord{
 
 int x;
 int y;
+int d;
 
-public  coord(int a, int b){
+public coord(int a, int b){
   x = a;
-  y = b;}
+  y = b;
+  d = 0;
+}
 
-    public coord(coord a){
+public coord(coord a){
 	x = a.getx();
-	y = a.gety();}
+	y = a.gety();
+	d = a.getd();
+}
+  
+public int getd(){
+ return d;
+}
+
+public void setd(int a){
+ d = a;
+}
+
+public void incd(){
+ d++;
+}
   
 public int getx(){
   return x;}
