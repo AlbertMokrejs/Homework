@@ -12,6 +12,7 @@ public class MazeI{
     private static final String show =  "\033[?25h";
     boolean printmode;
     int[] solution;
+    coord exitnode;
     
     public String toString(boolean x){
     	for(char[] a: map){
@@ -58,6 +59,7 @@ public MazeI(String name){
 	printmode = false;
 	solution = new int[1];
 	Stack<coord> tmp = new Stack<coord>();
+	exitnode = find('S');
 	tmp.push(find('S'));
 	tmp.push(find('S'));
 	deck = new ArrayDeque<Stack<coord>>();
@@ -250,6 +252,83 @@ public MazeI(String name){
 	    Stack<coord> tmpsd = (Stack<coord>)a.clone();
 	    tmpsd.push(tmpw);
 	    PQ.add(tmpsd, 9999*9999 - tmpsd.peek().getd());
+	}
+    }
+
+public boolean AStarrun(){
+	Stack<coord> tmp = new Stack<coord>();
+	while(!solved){
+	    tmp = PQ.getS();
+	    PQ.add(tmp, 9999*9999 - (tmp.peek().getd() + tmp.peek().dist(exitnode)) );
+	    solved = solution(tmp.peek());
+	    if(!solved){
+		Bestnext();
+	    }
+	}
+	coord tmpb;
+	Stack<coord> copy = (Stack<coord>)tmp.clone();
+	int z = 0;
+	Stack<coord> newer = new Stack<coord>();
+	while(!copy.empty()){
+		newer.push(copy.pop());
+		z++;
+	}
+	z-=1;
+	int x = 0;
+	solution = new int[z+1];
+	newer.pop();
+	while(x < z){
+		solution[x+1] = newer.peek().getx();
+		solution[x] = newer.pop().gety();
+		x+= 2;
+	}
+	while(!tmp.empty()){
+	    tmpb = tmp.pop();
+	    map[tmpb.getx()][tmpb.gety()] = 'x';
+	}
+	return true;
+    }
+
+public void Astarnext(){
+	Stack<coord> a = PQ.getS();
+	coord tmpz = new coord(a.peek());
+	coord tmpy = new coord(a.peek());
+	coord tmpx = new coord(a.peek());
+	coord tmpw = new coord(a.peek());
+	coord tmpa = new coord(a.pop());
+	coord tmpb = new coord(a.peek());
+	tmpz.incd();
+	tmpy.incd();
+	tmpx.incd();
+	tmpw.incd();
+	a.push(tmpa);
+	tmpz.setx(tmpz.getx()+1);
+	if(check(tmpz,tmpb)){
+	    printify(tmpz);
+	    Stack<coord> tmpsa = (Stack<coord>)a.clone();
+	    tmpsa.push(tmpz);
+	    PQ.add(tmpsa, 9999*9999 - (tmpsa.peek().getd() + tmpsa.peek().dist(exitnode)) );
+	}
+	tmpy.setx(tmpy.getx()-1);
+	if(check(tmpy,tmpb)){
+	    printify(tmpy);
+	    Stack<coord> tmpsb = (Stack<coord>)a.clone();
+	    tmpsb.push(tmpy);
+	    PQ.add(tmpsb, 9999*9999 - (tmpsb.peek().getd() + tmpsb.peek().dist(exitnode)) );
+	}
+	tmpx.sety(tmpx.gety()+1);
+	if(check(tmpx,tmpb)){
+	    printify(tmpx);
+	    Stack<coord> tmpsc = (Stack<coord>)a.clone();
+	    tmpsc.push(tmpx);
+	    PQ.add(tmpsc, 9999*9999 - (tmpsc.peek().getd() + tmpsc.peek().dist(exitnode)) );
+	}
+	tmpw.sety(tmpw.gety()-1);
+	if(check(tmpw,tmpb)){
+	    printify(tmpw);
+	    Stack<coord> tmpsd = (Stack<coord>)a.clone();
+	    tmpsd.push(tmpw);
+	    PQ.add(tmpsd, 9999*9999 - (tmpsd.peek().getd() + tmpsd.peek().dist(exitnode)) );
 	}
     }
   
