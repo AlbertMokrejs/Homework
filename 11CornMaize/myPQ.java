@@ -9,12 +9,14 @@ public class myPQ<T>{
 
     public myPQ(){
 	S = new Object[16];
+	P = new int[16];
 	t = 0;
 	TOGGLE = true;
     }
 
     public myPQ(boolean x){
 	S = new Object[16];
+	P = new int[16];
 	t = 0;
 	TOGGLE = x;
     }
@@ -24,10 +26,10 @@ public class myPQ<T>{
     }
 
     public void add(T x, int y){
-    	if(y < -9999*9999){
+    	if(y <= -9999*9999){
     		y = -9999*9999 + 1;
     	}
-	if(t < S.length-1){
+	if(t < S.length){
 	    S[t] = x;
 	    P[t] = y;
 	    t++;
@@ -42,17 +44,6 @@ public class myPQ<T>{
     }
 
     public void resize(){
-	if(t < S.length/4){
-	    Object[] tmp = new Object[(int)S.length/4 +1];
-	    int[] tmpb = new int[tmp.length];
-	    for(int x = 0; x < t; x++){
-		tmp[x] = S[x];
-		tmpb[x] = P[x];
-	    }
-	    P = tmpb;
-	    S = tmp;
-	}
-	else{
 	    Object[] tmp = new Object[S.length*2];
 	    int[] tmpb = new int[tmp.length];
 	    for(int x = 0; x < t; x++){
@@ -61,7 +52,6 @@ public class myPQ<T>{
 	    }
 	    P = tmpb;
 	    S = tmp;
-	}
     }
     
     public int findFirst(){
@@ -79,12 +69,12 @@ public class myPQ<T>{
     public T getS(){
     	int x = findFirst();
     	T tmp = (T)S[x];
-    	for(int y = x; y < t; y++){
+    	for(int y = x; y < t-1; y++){
     		S[y] = S[y+1];
     		P[y] = P[y+1];
     	}
-    	S[t] = null;
-    	P[t] = 0;
+    	S[t-1] = null;
+    	P[t-1] = 0;
     	t--;
     	return tmp;
     }
