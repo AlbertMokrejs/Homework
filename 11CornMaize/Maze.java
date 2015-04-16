@@ -4,6 +4,7 @@ import java.io.*;
 public class Maze{
 
     ArrayDeque<Stack<coord>> deck;
+    myPQ<Stack<coord>> PQ;
     char[][] map;
     boolean solved;
     private static final String clear =  "\033[2J";
@@ -11,6 +12,7 @@ public class Maze{
     private static final String show =  "\033[?25h";
     boolean printmode;
     int[] solution;
+    coord exitnode;
     
     public String toString(boolean x){
     	for(char[] a: map){
@@ -57,32 +59,29 @@ public Maze(String name){
 	printmode = false;
 	solution = new int[1];
 	Stack<coord> tmp = new Stack<coord>();
+	exitnode = find('E');
 	tmp.push(find('S'));
 	tmp.push(find('S'));
 	deck = new ArrayDeque<Stack<coord>>();
+	PQ = new myPQ<Stack<coord>>();
 	deck.addLast(tmp);
+	PQ.add(tmp, 9999*9999 - tmp.peek().getd());
 }
 
+    
     public static void main(String[]args){
-	Maze x = new Maze("map.txt");
 	Maze y = new Maze("map.txt");
-	x.solveBFS(true);
-	System.out.println(x);
-	y.solveDFS(true);
+	y.solveBest(true);
 	System.out.println(y);
-	int[] d = x.solutionCoordinates();
 	int[] c = y.solutionCoordinates();
 	String str = "";
-	for(int e = 0; e < d.length; e++){
-	    str+= d[e] + ",";
-	}
-	System.out.println(str);
 	str = "";
 	for(int f = 0; f < c.length; f++){
 	    str+= c[f] + ",";
 	}
 	System.out.println(str);
     }
+    
 
     public coord find(char a){
 	coord tmp = new coord(0,0);
@@ -95,6 +94,14 @@ public Maze(String name){
 	    }
 	}
 	return tmp;
+    }
+
+    public boolean solveBest(boolean x){
+    	printmode = x;
+    	return Bestrun();}
+
+    public boolean solveBest(){
+    	return solveBest(false);
     }
 
     
@@ -113,6 +120,14 @@ public Maze(String name){
     public boolean solveDFS(){
 	 return solveDFS(false);
     }
+    
+    public boolean solveAstar(){
+	return solveAstar(false);
+    }
+
+    public boolean solveAstar(boolean x){
+	printmode = x;
+	return AStarrun();}
 
     public boolean check(coord a, coord b){
 	boolean x =  a.getx() < map.length && a.getx() > -1 && a.gety() < map[0].length &&  a.gety() > -1 && map[a.getx()][a.gety()] != '#' && (a.getx() != b.getx() || a.gety() != b.gety());
@@ -196,6 +211,126 @@ public Maze(String name){
 	    deck.addFirst(tmpsd);
 	}
     }
+
+ public void Bestnext(){
+	Stack<coord> a = PQ.getS();
+	coord tmpz = new coord(a.peek());
+	coord tmpy = new coord(a.peek());
+	coord tmpx = new coord(a.peek());
+	coord tmpw = new coord(a.peek());
+	coord tmpa = new coord(a.pop());
+	coord tmpb = new coord(a.peek());
+	tmpz.incd();
+	tmpy.incd();
+	tmpx.incd();
+	tmpw.incd();
+	a.push(tmpa);
+	tmpz.setx(tmpz.getx()+1);
+	if(check(tmpz,tmpb)){
+	    printify(tmpz);
+	    Stack<coord> tmpsa = (Stack<coord>)a.clone();
+	    tmpsa.push(tmpz);
+	    PQ.add(tmpsa, 9999*9999 - tmpsa.peek().getd());
+	}
+	tmpy.setx(tmpy.getx()-1);
+	if(check(tmpy,tmpb)){
+	    printify(tmpy);
+	    Stack<coord> tmpsb = (Stack<coord>)a.clone();
+	    tmpsb.push(tmpy);
+	    PQ.add(tmpsb, 9999*9999 - tmpsb.peek().getd());
+	}
+	tmpx.sety(tmpx.gety()+1);
+	if(check(tmpx,tmpb)){
+	    printify(tmpx);
+	    Stack<coord> tmpsc = (Stack<coord>)a.clone();
+	    tmpsc.push(tmpx);
+	    PQ.add(tmpsc, 9999*9999 - tmpsc.peek().getd());
+	}
+	tmpw.sety(tmpw.gety()-1);
+	if(check(tmpw,tmpb)){
+	    printify(tmpw);
+	    Stack<coord> tmpsd = (Stack<coord>)a.clone();
+	    tmpsd.push(tmpw);
+	    PQ.add(tmpsd, 9999*9999 - tmpsd.peek().getd());
+	}
+    }
+
+public boolean AStarrun(){
+	Stack<coord> tmp = new Stack<coord>();
+	while(!solved){
+	    tmp = PQ.getS();
+	    PQ.add(tmp, 9999*9999 - (tmp.peek().getd() + tmp.peek().dist(exitnode)) );
+	    solved = solution(tmp.peek());
+	    if(!solved){
+		Bestnext();
+	    }
+	}
+	coord tmpb;
+	Stack<coord> copy = (Stack<coord>)tmp.clone();
+	int z = 0;
+	Stack<coord> newer = new Stack<coord>();
+	while(!copy.empty()){
+		newer.push(copy.pop());
+		z++;
+	}
+	z-=1;
+	int x = 0;
+	solution = new int[z+1];
+	newer.pop();
+	while(x < z){
+		solution[x+1] = newer.peek().getx();
+		solution[x] = newer.pop().gety();
+		x+= 2;
+	}
+	while(!tmp.empty()){
+	    tmpb = tmp.pop();
+	    map[tmpb.getx()][tmpb.gety()] = 'x';
+	}
+	return true;
+    }
+
+public void Astarnext(){
+	Stack<coord> a = PQ.getS();
+	coord tmpz = new coord(a.peek());
+	coord tmpy = new coord(a.peek());
+	coord tmpx = new coord(a.peek());
+	coord tmpw = new coord(a.peek());
+	coord tmpa = new coord(a.pop());
+	coord tmpb = new coord(a.peek());
+	tmpz.incd();
+	tmpy.incd();
+	tmpx.incd();
+	tmpw.incd();
+	a.push(tmpa);
+	tmpz.setx(tmpz.getx()+1);
+	if(check(tmpz,tmpb)){
+	    printify(tmpz);
+	    Stack<coord> tmpsa = (Stack<coord>)a.clone();
+	    tmpsa.push(tmpz);
+	    PQ.add(tmpsa, 9999*9999 - (tmpsa.peek().getd() + tmpsa.peek().dist(exitnode)) );
+	}
+	tmpy.setx(tmpy.getx()-1);
+	if(check(tmpy,tmpb)){
+	    printify(tmpy);
+	    Stack<coord> tmpsb = (Stack<coord>)a.clone();
+	    tmpsb.push(tmpy);
+	    PQ.add(tmpsb, 9999*9999 - (tmpsb.peek().getd() + tmpsb.peek().dist(exitnode)) );
+	}
+	tmpx.sety(tmpx.gety()+1);
+	if(check(tmpx,tmpb)){
+	    printify(tmpx);
+	    Stack<coord> tmpsc = (Stack<coord>)a.clone();
+	    tmpsc.push(tmpx);
+	    PQ.add(tmpsc, 9999*9999 - (tmpsc.peek().getd() + tmpsc.peek().dist(exitnode)) );
+	}
+	tmpw.sety(tmpw.gety()-1);
+	if(check(tmpw,tmpb)){
+	    printify(tmpw);
+	    Stack<coord> tmpsd = (Stack<coord>)a.clone();
+	    tmpsd.push(tmpw);
+	    PQ.add(tmpsd, 9999*9999 - (tmpsd.peek().getd() + tmpsd.peek().dist(exitnode)) );
+	}
+    }
   
     public boolean solution(coord a){
 	return map[a.getx()][a.gety()] == 'E';
@@ -269,6 +404,40 @@ public Maze(String name){
 	return true;
     }
 
+ public boolean Bestrun(){
+	Stack<coord> tmp = new Stack<coord>();
+	while(!solved){
+	    tmp = PQ.getS();
+	    PQ.add(tmp, 9999*9999 - tmp.peek().getd());
+	    solved = solution(tmp.peek());
+	    if(!solved){
+		Bestnext();
+	    }
+	}
+	coord tmpb;
+	Stack<coord> copy = (Stack<coord>)tmp.clone();
+	int z = 0;
+	Stack<coord> newer = new Stack<coord>();
+	while(!copy.empty()){
+		newer.push(copy.pop());
+		z++;
+	}
+	z-=1;
+	int x = 0;
+	solution = new int[z+1];
+	newer.pop();
+	while(x < z){
+		solution[x+1] = newer.peek().getx();
+		solution[x] = newer.pop().gety();
+		x+= 2;
+	}
+	while(!tmp.empty()){
+	    tmpb = tmp.pop();
+	    map[tmpb.getx()][tmpb.gety()] = 'x';
+	}
+	return true;
+    }
+
     public String toString(){
 	String str = "";
 	for(int x = 0; x < map.length; x++){
@@ -281,7 +450,7 @@ public Maze(String name){
 	if(printmode){
 	    char printtm = map[tmpz.getx()][tmpz.gety()];
 	    try {
-		Thread.sleep(40);
+		Thread.sleep(65);
 	    }catch(InterruptedException ex) {
 		Thread.currentThread().interrupt();}
 	    map[tmpz.getx()][tmpz.gety()] = 'x';
