@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class coord{
 
 int x;
@@ -18,8 +20,8 @@ public coord(coord a){
 
 public int dist(coord a){
 	int b = 0;
-	b+= abs(a.getx() - x);
-	b+= abs(a.gety() - y);
+	b+= Math.abs(a.getx() - x);
+	b+= Math.abs(a.gety() - y);
 	return b;
 }
   
