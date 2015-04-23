@@ -78,5 +78,8 @@ public class TreeNode<E> {
 	  return !(hasRight && hasLeft);
       }
 
+	public String toString(){
+		return "" + value;
+	}
 
 }
