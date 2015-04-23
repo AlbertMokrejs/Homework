@@ -74,4 +74,9 @@ public class TreeNode<E> {
 	  return hasRight;
       }
 
+      public boolean hasRoom(){
+	  return !(hasRight && hasLeft);
+      }
+
+
 }
