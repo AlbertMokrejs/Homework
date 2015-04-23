@@ -71,56 +71,58 @@ public class BTree<E> {
 	    postOrder( root );
     }
     
-    /*======== public void preOrder() ==========
-      Inputs:   TreeNode<E> curr  
-      Returns: 
-      
-      Prints out the elements in the tree by doing an
-      pre-order Traversal
-      ====================*/
     public void preOrder( TreeNode<E> curr ) {
+	System.out.println(curr);
+	if(curr.lcheck()){
+	    preOrder(curr.getLeft());
+	}
+	if(curr.rcheck()){
+	    preOrder(curr.getRight());
+	}
     }
 
-
-    /*======== public void inOrder() ==========
-      Inputs:   TreeNode<E> curr  
-      Returns: 
-      
-      Prints out the elements in the tree by doing an
-      in-order Traversal
-      ====================*/
-    public void inOrder( TreeNode<E> curr ) {
+    public void inOrder( TreeNode<E> curr ) {	
+	if(curr.lcheck()){
+	    inOrder(curr.getLeft());
+	}
+	System.out.println(curr);
+	if(curr.rcheck()){
+	    inOrder(curr.getRight());
+	}
     }
 
-    /*======== public void postOrder() ==========
-      Inputs:   TreeNode<E> curr  
-      Returns: 
-      
-      Prints out the elements in the tree by doing a
-      post-order Traversal
-
-      04/05/12 08:56:34
-      jdyrlandweaver
-      ====================*/
-    public void postOrder( TreeNode<E> curr ) {
+    public void postOrder( TreeNode<E> curr ) {	
+	if(curr.lcheck()){
+	    postOrder(curr.getLeft());
+	}
+	if(curr.rcheck()){
+	    postOrder(curr.getRight());
+	}
+	System.out.println(curr);
     }
     
-    /*======== public int getHeight()) ==========
-      Inputs:   
-      Returns: The height of the tree
-
-      Wrapper for the recursive getHeight method
-      ====================*/
     public int getHeight() {
 	return getHeight( root );
     }
-    /*======== public int getHeight() ==========
-      Inputs:   TreeNode<E> curr  
-      Returns:  The height of the tree rooted at node curr
-      
-      ====================*/
+    
     public int getHeight( TreeNode<E> curr ) {
-	return -1;
+	if(!curr.hasLeft() && !curr.hasRight()){
+	    return 1;
+	}
+	if(!curr.hasLeft()){
+	    return getHeight(curr.getRight());
+	}
+	if(!curr.hasRight()){
+	    return getHeight(curr.getLeft());
+	}
+	else{
+	    int x = getHeight(curr.getRight());
+	    int y = getHeight(curr.getLeft());
+	    if(x > y){
+		return x;
+	    }
+	    return y;
+	}
     }
 
     /*======== public String getLevel() ==========
