@@ -117,7 +117,7 @@ public class BTree<E> {
 
     
     public String getLevel(int Level){
-	return getLevel(root, Level, 0);
+	return getLevel(root, Level, 1);
     }
 
     public String getLevel( TreeNode<E> curr, int level, int currLevel ) {
