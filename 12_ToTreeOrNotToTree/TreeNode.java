@@ -37,7 +37,7 @@ public class TreeNode<E> {
 	if(hasValue){
 	    return value;
 	}
-	throw new NullPointerException() e;
+	throw new NullPointerException();
     }
 
     public void setLeft(TreeNode<E> x){
@@ -54,14 +54,14 @@ public class TreeNode<E> {
 	if(hasLeft){
 	    return Left;
 	}
-	throw new NullPointerException() e;
+	throw new NullPointerException();
     }
 
       public TreeNode<E> getRight(){
 	if(hasRight){
 	    return Right;
 	}
-	throw new NullPointerException() e;
+	throw new NullPointerException();
     }
 
       public boolean lcheck(){
@@ -78,8 +78,14 @@ public class TreeNode<E> {
 	  return !(hasRight && hasLeft);
       }
 
-	public String toString(){
-		return "" + value;
-	}
+      public boolean hasLeft(){
+	  return hasLeft;}
+
+      public boolean hasRight(){
+	  return hasRight;}
+
+      public String toString(){
+	  return "" + value;}
+
 
 }
