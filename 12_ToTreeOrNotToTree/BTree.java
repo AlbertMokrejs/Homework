@@ -1,16 +1,3 @@
-/*========== BTree.java ==========  
-  Lab: Complete
-  1. TreeNode.java
-  2. add()
-  3. pre/post/in Order()
-  4. getHeight
-  5. getLevel
-  6. toString
-  
-  Basic binary tree.
-  Uses TreeNode
-=========================*/
-
 import java.io.*;
 import java.util.*;
 
@@ -30,17 +17,19 @@ public class BTree<E> {
     }
 
 
-    private TreeNode<T> add( TreeNode<E> curr, TreeNode<E> bn ){
-	if(curr.hasRoom()){
-	    Random r = new Random()
+    private void  add( TreeNode<E> curr, TreeNode<E> bn ){
+	if(root == null){
+	    root = bn;
+	}
+	else{
+	    if(curr.hasRoom()){
+	    Random r = new Random();
 	    if(!curr.lcheck() && !curr.rcheck()){
 		    if(r.nextDouble() > 0.5){
 			curr.setLeft(bn);
 		    }
 		    else{
-			curr.setRight(bn);
-		    }
-		}
+			curr.setRight(bn);}}
 	    else{
 		if(!curr.lcheck()){
 		    curr.setLeft(bn);
@@ -59,6 +48,7 @@ public class BTree<E> {
 		add(curr.getRight(), bn);
 	    }
 	}
+    }
     }
 		    
     
@@ -106,57 +96,52 @@ public class BTree<E> {
     }
     
     public int getHeight( TreeNode<E> curr ) {
-	if(!curr.hasLeft() && !curr.hasRight()){
+	if(!curr.lcheck() && !curr.rcheck()){
 	    return 1;
 	}
-	if(!curr.hasLeft()){
-	    return getHeight(curr.getRight());
+	if(curr.lcheck() && !curr.rcheck()){
+	    return 1 + getHeight(curr.getLeft());
 	}
-	if(!curr.hasRight()){
-	    return getHeight(curr.getLeft());
+	if(curr.rcheck() && !curr.lcheck()){
+	    return 1 + getHeight(curr.getRight());
 	}
 	else{
 	    int x = getHeight(curr.getRight());
 	    int y = getHeight(curr.getLeft());
 	    if(x > y){
-		return x;
+		return 1 + x;
 	    }
-	    return y;
+	    return 1 + y;
 	}
     }
 
-    /*======== public String getLevel() ==========
-      Inputs:   TreeNode<E> curr
-                int level
-                int currLevel  
-      Returns: A string containing all the elements on the
-               given level, ordered left -> right
-      
-      ====================*/
+    
+    public String getLevel(int Level){
+	return getLevel(root, Level, 0);
+    }
+
     public String getLevel( TreeNode<E> curr, int level, int currLevel ) {
-	return "";
+	if(level == currLevel){
+	    return "" + curr;
+	}
+	else{
+	    String x = "";
+	    if(curr.hasLeft()){
+		x += getLevel(curr.getLeft(), level, currLevel++);
+	    }
+	    if(curr.hasRight()){
+		x += getLevel(curr.getRight(), level, currLevel++);
+	    }
+	    return x;
+	}
     }
     
-    /*======== public String toString()) ==========
-      Inputs:   
-      Returns: A string representation of the tree
-     
-      This string should display each level as a separate line.
-      A simple version might look something like this:
-
-      0
-      1 2
-      3 4 5
-
-      Note that you cannot tell exactly where 3, 4 and 5 lie.
-      That is ok, but if you want a CHALLENGE, you can try to
-      get the output to look nicer, something like this:
-             0
-          1      2
-            3  4   5
-      ====================*/
     public String toString() {
-	return "";
+	String d = "";
+	for(int x = 0; x < getHeight(); x++){
+	    d += getLevel(x) + "\n";
+	}
+	return d;
     }
 	
 
