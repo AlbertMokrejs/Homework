@@ -1,4 +1,4 @@
-//Your binary search tree skeleton file:
+//My binary search tree skeleton file:
 
 import java.io.*;
 import java.util.*;
@@ -36,7 +36,7 @@ public class BSTree <T extends Comparable> {
 		curr.setRight(t);
 		return t;
 	    }
-	    if(curr.compareTo(t) < 0){
+	    if(curr.compareTo(t) <= 0){
 		if(curr.lcheck()){
 		    return add(curr.getLeft(),t);
 		}
@@ -54,16 +54,36 @@ public class BSTree <T extends Comparable> {
 	root = remove( root, c );
     }
 
-    /*======== public BSTreeNode<T> remove() ==========
-      Inputs:   BSTreeNode<T> curr
-		T c
-      Returns: 
-
-      Should remove the value c from the tree rooted at
-      curr, if it exists.
-      ====================*/
     private BSTreeNode<T> remove( BSTreeNode<T> curr, T c ) {
-	return null;
+	BSTreeNode<T> a = null;
+	if(curr.getValue().compareTo(c) == 0){
+	    a = curr;
+	}
+	if(curr.getValue().compareTo(c) > 0){
+	    return remove(curr.getLeft(), c);
+	}
+	if(curr.getValue().compareTo(c) < 0){
+	    return remove(curr.getRight(), c);
+	}
+    }
+
+
+    private BSTreeNode<T> restructure(BSTreeNode<T> curr, BSTreeNode<T> torep, BSTreeNode<T> par){
+	if(curr.compareTo(torep) == 0){
+	    if(curr.lcheck()){
+		return restructure(curr.getLeft() , torep, curr);
+	    }
+	    if(curr.rcheck()){
+		return restructure(curr.getRight() , torep, curr);
+	    }
+	    if(par != null && par.lcheck() && par.getLeft().compareTo(curr) == 0){
+		par.setLeft(null);
+	    }
+	    if(par != null && par.rcheck() && par.getRight().compareTo(curr) == 0){
+		par.setRight(null);
+	    }
+	    
+	    
     }
 
 
