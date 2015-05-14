@@ -21,6 +21,7 @@ public void add(int x){
   heaplist[heaplist[0]+1] = x;
   heaplist[0]++;
   check(heaplist[0]);
+  dcheck(1);
 }
 
 public void resize(){
