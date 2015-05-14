@@ -40,6 +40,10 @@ public int remove(){
   return a;
 }
 
+public int get(){
+	return heaplist[1];
+}
+
 public void dcheck(int a){
     if(a*2 + 1 < heaplist[0]){
 	if(toggle){
